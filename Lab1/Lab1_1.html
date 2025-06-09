@@ -1,1 +1,119 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Пенсионный калькулятор</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="number"], textarea {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        .radio-group {
+            display: flex;
+            gap: 15px;
+        }
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        textarea {
+            height: 100px;
+            resize: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Пенсионный калькулятор</h1>
+    <form id="pensionForm">
+        <div>
+            <label for="age">Ваш возраст:</label>
+            <input type="number" id="age" name="age" min="0" required>
+        </div>
+        
+        <div>
+            <label>Ваш пол:</label>
+            <div class="radio-group">
+                <div class="radio-option">
+                    <input type="radio" id="male" name="gender" value="male" checked>
+                    <label for="male">Мужской</label>
+                </div>
+                <div class="radio-option">
+                    <input type="radio" id="female" name="gender" value="female">
+                    <label for="female">Женский</label>
+                </div>
+            </div>
+        </div>
+        
+        <button type="button" id="calculateBtn">Рассчитать</button>
+        
+        <div>
+            <label for="result">Результат:</label>
+            <textarea id="result" readonly></textarea>
+        </div>
+    </form>
 
+    <script>
+        "use strict";
+        document.getElementById('calculateBtn').addEventListener('click', function() {
+            const ageInput = document.getElementById('age');
+            const age = parseInt(ageInput.value);
+            const gender = document.querySelector('input[name="gender"]:checked').value;
+            const resultTextarea = document.getElementById('result');
+            
+            let message = "Да кто ты такой?";
+            
+            if (age >= 0 && age <= 17) {
+                message = "Вам работать ещё рано — учитесь";
+            } else if (gender === 'male') {
+                if (age >= 18 && age <= 59) {
+                    message = "Вам ещё работать и работать";
+                } else if (age >= 60 && age <= 64) {
+                    message = "Скоро пенсия!";
+                } else if (age >= 65) {
+                    message = "Вам пора на пенсию";
+                }
+            } else if (gender === 'female') {
+                if (age >= 18 && age <= 54) {
+                    message = "Вам ещё работать и работать";
+                } else if (age >= 55 && age <= 59) {
+                    message = "Скоро пенсия!";
+                } else if (age >= 60) {
+                    message = "Вам пора на пенсию";
+                }
+            }
+            
+            resultTextarea.value = message;
+        });
+    </script>
+</body>
+</html>
