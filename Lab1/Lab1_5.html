@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Таблица животных</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+        }
+        .container {
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        #result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e8f4f8;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Таблица животных</h1>
+        <label for="rows">Количество строк:</label>
+        <input type="number" id="rows" min="1" value="5">
+        <button id="drawButton">Рисовать</button>
+        <div id="result">
+            <p>Результат будет выведен в консоль браузера (F12 → Console)</p>
+        </div>
+    </div>
+
+    <script>
+        "use strit";
+        document.getElementById('drawButton').addEventListener('click', function() {
+            const rows = parseInt(document.getElementById('rows').value);
+            const resultDiv = document.getElementById('result');
+            
+            if (isNaN(rows) || rows < 1) {
+                resultDiv.innerHTML = '<p style="color: red;">Пожалуйста, введите корректное число строк (≥ 1)</p>';
+                return;
+            }
+            
+            console.clear();
+         
+            generateAnimalTable(rows);
+            
+            resultDiv.innerHTML = '<p style="color: green;">Таблица успешно выведена в консоль! (F12 → Console)</p>';
+        });
+        
+        function generateAnimalTable(rows) {
+            const pattern = ['dog', 'dog', 'dog', 'cat', 'cat'];
+            let patternIndex = 0;
+            
+            for (let i = 0; i < rows; i++) {
+                let row = [];
+                for (let j = 0; j < 6; j++) {
+                    row.push(pattern[patternIndex % pattern.length]);
+                    patternIndex++;
+                }
+                
+                console.log(row.join('\t'));
+            }
+        }
+    </script>
+</body>
+</html>
