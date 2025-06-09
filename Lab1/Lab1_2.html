@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Считать ворон</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Считать ворон</h1>
+    <form id="crowForm">
+        <div>
+            <label for="num">Количество ворон:</label>
+            <input type="number" id="num" name="num" min="0" required>
+        </div>
+        
+        <button type="button" id="countBtn">Считать</button>
+    </form>
+
+    <script>
+        "use strict";
+        document.getElementById('countBtn').addEventListener('click', function() {
+            const numInput = document.getElementById('num');
+            const num = parseInt(numInput.value);
+            
+            if (isNaN(num) || num < 0) {
+                alert("Пожалуйста, введите корректное число ворон");
+                return;
+            }
+            
+            let ending;
+            
+            const lastTwoDigits = num % 100;
+            const lastDigit = num % 10;
+            
+            if (lastTwoDigits >= 11 && lastTwoDigits <= 14) {
+                ending = "ворон";
+            } else {
+                switch(lastDigit) {
+                    case 1:
+                        ending = "ворона";
+                        break;
+                    case 2:
+                    case 3:
+                    case 4:
+                        ending = "вороны";
+                        break;
+                    default:
+                        ending = "ворон";
+                }
+            }
+            
+            alert(`На ветке сидит ${num} ${ending}`);
+        });
+    </script>
+</body>
+</html>
