@@ -95,7 +95,7 @@
                 </div>
             </div>
 
-            <button type="button" id="calculateBtn">Рассчитать</button>
+            <button type="submit">Рассчитать</button>
         </form>
 
         <div class="form-group">
@@ -108,11 +108,13 @@
         'use strict';
 
         document.addEventListener('DOMContentLoaded', function() {
-            const calculateBtn = document.getElementById('calculateBtn');
-            calculateBtn.addEventListener('click', calculatePension);
+            const pensionForm = document.getElementById('pensionForm');
+            pensionForm.addEventListener('submit', handleFormSubmit);
         });
 
-        function calculatePension() {
+        function handleFormSubmit(event) {
+            event.preventDefault(); // Отменяем стандартное поведение формы
+            
             const ageInput = document.getElementById('age');
             const genderInput = document.querySelector('input[name="gender"]:checked');
             const resultOutput = document.getElementById('result');
@@ -128,7 +130,8 @@
                 if (isNaN(age) || age < 0) {
                     throw new Error('Пожалуйста, введите корректный возраст');
                 }
-resultOutput.value = getPensionMessage(age, gender);
+                
+                resultOutput.value = getPensionMessage(age, gender);
             } catch (error) {
                 resultOutput.value = error.message;
             }
