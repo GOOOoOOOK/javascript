@@ -21,14 +21,16 @@
         <form id="crowForm">
             <label for="num">Количество ворон:</label>
             <input type="number" id="num" name="num" required min="1"><br><br>
-            <button type="button" onclick="countCrows()">Считать</button>
+            <button type="submit">Считать</button>
         </form>
     </div>
 
     <script>
         'use strict';
 
-        function countCrows() {
+        document.getElementById('crowForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Отменяем стандартное поведение формы
+            
             const num = parseInt(document.getElementById('num').value);
             
             // Проверка на корректный ввод
@@ -57,7 +59,7 @@
             }
 
             alert(`На ветке сидит ${num} ${word}`);
-        }
+        });
     </script>
 </body>
 </html>
