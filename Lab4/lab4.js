@@ -73,13 +73,18 @@ try {
 
 
     function isEmpty(obj) {
-        if (typeof obj !== 'object' || obj === null) return true;
+    if (typeof obj !== 'object' || obj === null) return true;
 
-        for (let key in obj) {
-            if (obj.hasOwnProperty(key)) return false;
-        }
-        return Object.getOwnPropertySymbols(obj).length === 0;
+    // Проверяем перечисляемые свойства
+    for (let key in obj) {
+        if (obj.hasOwnProperty(key)) return false;
     }
+
+    // Проверяем неперечисляемые свойства
+    const ownProperties = Object.getOwnPropertyNames(obj);
+    if (ownProperties.length > 0) return false;
+
+    return true;
 
     let obj1 = { [Symbol()]: true };
     let obj2 = {};
