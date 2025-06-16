@@ -1,36 +1,31 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Скрыть и показать текст</title>
-    <style>
-        #text {
-            font-size: 20px;
-            margin: 20px 0;
-            position: sticky;
-            bottom: 0;
-        }    
-    </style>
+	<meta charset="UTF-8">
+	<title>Text</title>
 </head>
 <body>
+	<input type="button" id="hider" value="Спрятать текст">
 
-<div id="text">Текст.</div>
-<button id="toggleButton">Скрыть текст</button>
+	<div id="text">Текст</div>
 
-<script>
-    const textElement = document.getElementById('text');
-    const toggleButton = document.getElementById('toggleButton');
-    toggleButton.addEventListener('click', function() {
-        if (textElement.style.display === 'none') {
-            textElement.style.display = 'block';
-            toggleButton.textContent = 'Скрыть текст';
-        } else {
-            textElement.style.display = 'none';
-            toggleButton.textContent = 'Показать текст';
-        }
-    });
-</script>
-
+	<script>
+   
+    'use strict';
+        document.addEventListener('DOMContentLoaded', function() {
+            const hiderButton = document.getElementById('hider');
+            const textElement = document.getElementById('text');
+            
+            hiderButton.addEventListener('click', function() {
+                if (textElement.style.display === 'none') {
+                    textElement.style.display = 'block';
+                    hiderButton.value = 'Спрятать текст';
+                } else {
+                    textElement.style.display = 'none';
+                    hiderButton.value = 'Показать текст';
+                }
+            });
+        });
+    </script>
 </body>
 </html>
