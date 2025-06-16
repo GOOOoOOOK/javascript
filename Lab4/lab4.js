@@ -74,10 +74,11 @@ try {
     function isEmpty(obj) {
         if (typeof obj !== 'object' || obj === null) return true;
 
-        // Проверяем перечисляемые свойства
         for (let key in obj) {
             if (obj.hasOwnProperty(key)) return false;
         }
+        return Object.getOwnPropertySymbols(obj).length === 0;
+    }
 
         // Проверяем неперечисляемые свойства
         const ownProperties = Object.getOwnPropertyNames(obj);
