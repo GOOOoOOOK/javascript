@@ -71,24 +71,26 @@ try {
         books[i].show();
     }
 
-    function isEmpty(obj) {
-        if (typeof obj !== 'object' || obj === null) return true;
-
-        for (let key in obj) {
-            if (obj.hasOwnProperty(key)) return false;
+   function isEmpty(obj) {
+        if (obj === null || typeof obj !== 'object') {
+            return true;
         }
-        return Object.getOwnPropertySymbols(obj).length === 0;
+        return Reflect.ownKeys(obj).length === 0;
     }
 
-    let obj1 = { [Symbol()]: true };
-    let obj2 = {};
+    console.log("\n--- Проверка функции isEmpty по заданию ---");
+    let emptyObj = {};
+    console.log("Проверка на {}:", isEmpty(emptyObj)); // true
 
-    console.log("Объект 1", isEmpty(obj1));
-    console.log("Объект 2", isEmpty(obj2));
+    let symbolObj = { [Symbol("id")]: true };
+    console.log("Проверка на {[Symbol()]: true}:", isEmpty(symbolObj)); // false
+
+    let nonEnumObj = Object.defineProperty({}, 'name', { value: 'John' });
+    console.log("Проверка на объекте с неперечисляемым свойством:", isEmpty(nonEnumObj)); // false
+    console.log("--- Конец проверки isEmpty ---\n");
 
     let classObject = {
         className: "open menu",
-
         addClass(cls) {
             let classes = this.className.split(' ');
             if (!classes.includes(cls)) {
@@ -96,7 +98,6 @@ try {
             }
             return this;
         },
-
         removeClass(cls) {
             let classes = this.className.split(' ');
             let index = classes.indexOf(cls);
@@ -120,7 +121,7 @@ try {
     console.log("JSON строка:", jsonString);
 
     let object2 = JSON.parse(jsonString);
-    console.log('Сравнение объектов из JSON:', JSON.stringify(object2) === JSON.stringify(classObject));
+    console.log('Сравнение объектов из JSON:', JSON.stringify(object2) === JSON.stringify(classObject));;
 
     function getSecondsToday() {
         let now = new Date();
