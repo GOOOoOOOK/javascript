@@ -71,28 +71,26 @@ try {
         books[i].show();
     }
 
-
     function isEmpty(obj) {
-    if (typeof obj !== 'object' || obj === null) return true;
+        if (typeof obj !== 'object' || obj === null) return true;
 
-    // Проверяем перечисляемые свойства
-    for (let key in obj) {
-        if (obj.hasOwnProperty(key)) return false;
+        // Проверяем перечисляемые свойства
+        for (let key in obj) {
+            if (obj.hasOwnProperty(key)) return false;
+        }
+
+        // Проверяем неперечисляемые свойства
+        const ownProperties = Object.getOwnPropertyNames(obj);
+        if (ownProperties.length > 0) return false;
+
+        return true;
     }
-
-    // Проверяем неперечисляемые свойства
-    const ownProperties = Object.getOwnPropertyNames(obj);
-    if (ownProperties.length > 0) return false;
-
-    return true;
 
     let obj1 = { [Symbol()]: true };
     let obj2 = {};
 
     console.log("Объект 1", isEmpty(obj1));
     console.log("Объект 2", isEmpty(obj2));
-
-
 
     let classObject = {
         className: "open menu",
@@ -124,13 +122,11 @@ try {
     classObject.removeClass('menu');
     console.log("className после removeClass('menu'):", classObject.className);
 
-
     let jsonString = JSON.stringify(classObject, null, 2);
     console.log("JSON строка:", jsonString);
 
     let object2 = JSON.parse(jsonString);
     console.log('Сравнение объектов из JSON:', JSON.stringify(object2) === JSON.stringify(classObject));
-
 
     function getSecondsToday() {
         let now = new Date();
@@ -140,16 +136,16 @@ try {
 
     console.log("Секунд с начала дня: ", getSecondsToday());
 
-
-   function formatDate(date) {
-    // Получаем компоненты даты
-    const year = date.getFullYear();
-    // Месяцы в JavaScript начинаются с 0 (январь = 0), поэтому добавляем 1
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
-    
-    // Собираем дату в формате YYYY.MM.DD
-    return `${year}.${month}.${day}`;
-    } catch (error) {
+    function formatDate(date) {
+        // Получаем компоненты даты
+        const year = date.getFullYear();
+        // Месяцы в JavaScript начинаются с 0 (январь = 0), поэтому добавляем 1
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        
+        // Собираем дату в формате YYYY.MM.DD
+        return `${year}.${month}.${day}`;
+    }
+} catch (error) {
     console.error("Произошла ошибка:", error.message);
 }
