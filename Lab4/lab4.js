@@ -80,13 +80,6 @@ try {
         return Object.getOwnPropertySymbols(obj).length === 0;
     }
 
-        // Проверяем неперечисляемые свойства
-        const ownProperties = Object.getOwnPropertyNames(obj);
-        if (ownProperties.length > 0) return false;
-
-        return true;
-    }
-
     let obj1 = { [Symbol()]: true };
     let obj2 = {};
 
